@@ -1,0 +1,21 @@
+QT4 spec for Linux => Win32 cross compilation
+=============================================
+
+To use just copy (or symlink) the dir to 
+/usr/share/qt4/mkspecs/linuxtowin32-cross or whereever QT4  is installed.
+
+Then setup the following QMAKE properties :
+QTWIN32_INSTALL_BINS    - Where are the Win32 QT-binaries (moc, qmake etc.)
+QTWIN32_INSTALL_HEADERS - Where are the win31 QT-headers
+QTWIN32_INSTALL_LIBS    - Where are the Win32 QT-dlls
+
+Setup using "qmake -set <property> <value"
+
+Then just run "qmake -spec linuxtowin32-cross" in your project dir to generate
+the makefiles.
+
+A minor glitch is that the librarynames used for linking is not correct. So
+the makefiles generated will not link correctly. The dlls are on Win32 does not 
+contains the postfixed number - fx. QtGui4, and QtCore4. Instead they are just
+without the number - fx. QtGui and QtCore. This minor details must as of now be
+changed manually in the makefile.
